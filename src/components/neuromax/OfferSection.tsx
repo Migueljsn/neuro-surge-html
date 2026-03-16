@@ -140,6 +140,7 @@ const OfferSection = () => {
               href={getWhatsAppUrl(quantity)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => (window as any).fbq?.('track', 'Contact')}
               className="nm-cta block w-full text-center px-6 py-5 rounded-xl text-base md:text-lg"
             >
               💬 GARANTIR MINHA MENTE BLINDADA VIA WHATSAPP

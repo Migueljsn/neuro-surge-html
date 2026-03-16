@@ -11,6 +11,7 @@ const FinalCtaSection = () => {
           Cada dia sem o magnésio certo é um dia com menos conexões, menos memória, menos você. O Mente Blindada não é milagre — é ciência. E agora está com 49% OFF por tempo limitado.
         </p>
         <a href={WA_URL} target="_blank" rel="noopener noreferrer"
+          onClick={() => (window as any).fbq?.('track', 'Contact')}
           className="nm-cta inline-block px-10 py-5 rounded-xl text-base md:text-lg">
           💬 COMEÇAR MEU UPGRADE CEREBRAL VIA WHATSAPP
         </a>

@@ -82,6 +82,7 @@ const HeroSection = () => {
 
             <div className="animate-fade-up-delay-3 flex flex-col items-center md:items-start">
               <a href={WA_URL} target="_blank" rel="noopener noreferrer"
+                onClick={() => (window as any).fbq?.('track', 'Contact')}
                 className="nm-cta inline-block w-full md:w-auto px-8 py-4 rounded-lg text-base md:text-lg text-center">
                 💬 QUERO MINHA MENTE BLINDADA VIA WHATSAPP
               </a>
