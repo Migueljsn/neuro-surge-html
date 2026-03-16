@@ -12,5 +12,9 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+    allowedHosts: ["amevit-amevit.hqzrjv.easypanel.host"],
+  },
+  preview: {
+    allowedHosts: ["amevit-amevit.hqzrjv.easypanel.host"],
   },
 });
