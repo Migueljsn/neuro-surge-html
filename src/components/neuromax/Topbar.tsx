@@ -19,7 +19,7 @@ const Topbar = () => {
       <div className="max-w-page mx-auto px-4 py-2.5 text-center">
         <p className="font-headline font-700 text-sm md:text-base tracking-wide uppercase"
            style={{ color: "hsl(var(--nm-bg-dark))" }}>
-          🔥 ENTREGANDO EM PIRACURUCA E REGIÃO — 49% OFF | Apenas 11 unidades restantes | Frete Grátis
+          🔥 ENTREGANDO EM PIRACURUCA E REGIÃO ATÉ 30KM — 49% OFF | Apenas 11 unidades restantes | Taxa de entrega R$3,00
         </p>
       </div>
     </div>

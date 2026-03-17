@@ -41,7 +41,7 @@ const HeroSection = () => {
               DESENVOLVIDO COM BASE EM PESQUISAS DO MIT • HARVARD
             </p>
             <p className="font-mono-sci text-xs nm-text-muted tracking-widest uppercase mb-4 animate-fade-up">
-              📍 CHEGANDO EM PIRACURUCA E REDONDEZAS EM ATÉ 3 DIAS ÚTEIS
+              📍 ENTREGA RÁPIDA EM PIRACURUCA E RAIO DE 30KM • RETIRE NA FARMÁCIA
             </p>
 
             <h1 className={`text-3xl md:text-[56px] md:leading-[1.05] font-extrabold mb-6 transition-all duration-500 ${
@@ -87,7 +87,7 @@ const HeroSection = () => {
                 💬 QUERO MINHA MENTE BLINDADA VIA WHATSAPP
               </a>
               <p className="nm-text-muted text-xs mt-3 text-center md:text-left">
-                Garantia de 7 dias • Frete Grátis • Parcele em 12x
+                Garantia de 7 dias • Taxa de entrega R$3,00 • Parcele em 4x sem juros
               </p>
             </div>
           </div>

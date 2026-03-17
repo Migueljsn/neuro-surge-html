@@ -5,12 +5,12 @@ type Qty = 1 | 2 | 3 | 4 | 5 | 6;
 const WA_NUMBER = "5586999315131";
 
 const QTY_OPTIONS: { value: Qty; label: string; detail: string }[] = [
-  { value: 1, label: "1 Frasco", detail: "R$ 64,99 • Frete Grátis" },
-  { value: 2, label: "2 Frascos", detail: "R$ 119,98 • Frete Grátis ⚡" },
-  { value: 3, label: "3 Frascos", detail: "R$ 164,97 • Frete Grátis + 5% OFF" },
-  { value: 4, label: "4 Frascos", detail: "R$ 199,96 • Frete Grátis + 8% OFF" },
-  { value: 5, label: "5 Frascos", detail: "R$ 234,95 • Frete Grátis + 10% OFF" },
-  { value: 6, label: "6 Frascos", detail: "R$ 259,94 • Frete Grátis + 15% OFF ⭐" },
+  { value: 1, label: "1 Frasco", detail: "R$ 64,99 • Taxa de entrega R$3,00" },
+  { value: 2, label: "2 Frascos", detail: "R$ 129,98 • Taxa de entrega R$3,00 ⚡" },
+  { value: 3, label: "3 Frascos", detail: "R$ 194,97 • Taxa de entrega R$3,00" },
+  { value: 4, label: "4 Frascos", detail: "R$ 259,96 • Taxa de entrega R$3,00" },
+  { value: 5, label: "5 Frascos", detail: "R$ 324,95 • Taxa de entrega R$3,00" },
+  { value: 6, label: "6 Frascos", detail: "R$ 389,94 • Taxa de entrega R$3,00 ⭐" },
 ];
 
 const getWhatsAppUrl = (qty: Qty) => {
@@ -78,7 +78,7 @@ const OfferSection = () => {
                 <span className="nm-badge-warn px-3 py-1 rounded-full text-sm font-bold">49% OFF</span>
               </div>
               <p className="nm-text-muted text-sm mt-2">
-                em até 12x de <span className="font-semibold text-foreground">R$ 6,49</span> sem juros
+                em até 4x de <span className="font-semibold text-foreground">R$ 16,25</span> sem juros no cartão
               </p>
             </div>
 
@@ -87,21 +87,21 @@ const OfferSection = () => {
               <div className="flex items-center gap-2 flex-wrap mb-1">
                 <span className="text-lg">📍</span>
                 <span className="text-sm text-white">
-                  Chegará em <strong className="nm-text-green">Piracuruca e região</strong> em até <strong className="nm-text-green">3 dias úteis</strong>
+                  Entrega <strong className="nm-text-green">rápida em Piracuruca</strong> e raio de <strong className="nm-text-green">30km</strong> — ou retire na farmácia
                 </span>
               </div>
               <p className="text-xs nm-text-muted">
-                Enviamos para Piracuruca, Batalha, Buriti dos Lopes, Cocal e toda a região Norte do Piauí — Frete Grátis
+                Pedidos até 15h saem no mesmo dia • Taxa de entrega R$3,00 • Retirada grátis na farmácia parceira
               </p>
             </div>
 
             <div className="nm-section-card rounded-xl p-4 mb-6 border border-muted/20">
-              <p className="nm-text-green text-sm font-semibold">💚 PIX: 5% OFF adicional + Envio Prioritário</p>
+              <p className="nm-text-green text-sm font-semibold">💚 Atendimento 07h–21h • Resposta rápida no WhatsApp</p>
             </div>
 
             {/* Quantity selector */}
             <p className="text-xs nm-text-muted mb-2 font-headline uppercase tracking-wider">
-              Quantidade — <span className="nm-text-green">Frete Grátis em todos os kits</span>
+              Quantidade — <span className="nm-text-green">Preço tabelado por frasco</span>
             </p>
             <div className="space-y-2 mb-6">
               {QTY_OPTIONS.map((opt) => (
@@ -152,13 +152,13 @@ const OfferSection = () => {
             {/* Trust badges */}
             <div className="flex flex-wrap justify-center gap-3 md:gap-6 mt-8 text-xs nm-text-muted">
               <span>🔒 Compra Segura</span>
-              <span>🚚 Frete Grátis</span>
+              <span>🚚 Entrega R$3,00</span>
               <span>↩️ 7 Dias Garantia</span>
               <span>✅ 3.910 Vendidos</span>
             </div>
 
             <p className="text-center nm-text-muted text-xs mt-4">
-              VISA • Mastercard • Elo • Hipercard • PIX • Boleto • Amex
+              PIX • Transferência • Espécie • Cartão presencial (até 4x sem juros)
             </p>
           </div>
         </div>
