@@ -19,7 +19,7 @@ const FinalCtaSection = () => {
           Mais de 3.910 pessoas já tomaram essa decisão. <span className="nm-stars">⭐⭐⭐⭐⭐</span>
         </p>
         <p className="nm-text-muted text-xs mt-3">
-          📍 Entregamos em Piracuruca e raio de 30km • Pedidos até 15h saem no mesmo dia • Atendimento 07h–21h
+          📍 Entregamos em Piracuruca e toda a região Norte do Piauí em até 3 dias úteis
         </p>
       </div>
     </section>

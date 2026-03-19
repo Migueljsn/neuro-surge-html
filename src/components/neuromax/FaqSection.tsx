@@ -19,15 +19,7 @@ const faqs = [
   },
   {
     q: "E se eu não sentir resultados?",
-    a: "Oferecemos garantia de 7 dias. Se você usar corretamente e não perceber qualquer diferença, entre em contato pelo WhatsApp e fazemos a troca por outro produto da loja. Nossa farmácia parceira está comprometida com o seu resultado.",
-  },
-  {
-    q: "Como funciona a entrega?",
-    a: "Entregamos em Piracuruca e num raio de até 30km com taxa de R$3,00. Pedidos feitos até 15h saem no mesmo dia. Também é possível retirar gratuitamente na farmácia parceira. Atendimento via WhatsApp das 07h às 21h.",
-  },
-  {
-    q: "Quais formas de pagamento são aceitas?",
-    a: "Aceitamos PIX, transferência bancária, dinheiro (espécie) e cartão presencial — crédito parcelado em até 4x sem juros ou débito. Não aceitamos link de pagamento; o cartão deve ser inserido ou aproximado na maquininha.",
+    a: "Oferecemos garantia de 7 dias com dinheiro de volta, sem perguntas. Se você usar corretamente e não perceber qualquer diferença, basta entrar em contato com nosso suporte e realizamos o reembolso integral. Nosso compromisso é com o seu resultado.",
   },
 ];
 
