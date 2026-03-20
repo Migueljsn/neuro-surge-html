@@ -2,7 +2,14 @@ import { useState } from "react";
 
 type Qty = 1 | 2 | 3 | 4 | 5 | 6;
 
-const WA_NUMBER = "5586999315131";
+const CHECKOUT_URLS: Record<Qty, string> = {
+  1: "https://seguro.amevitnutrition.com.br/r/MA0YY3M9O7",
+  2: "https://seguro.amevitnutrition.com.br/r/MDWJP970WE",
+  3: "https://seguro.amevitnutrition.com.br/r/7FAXVXDLS7",
+  4: "https://seguro.amevitnutrition.com.br/r/H4GV5W79HC",
+  5: "https://seguro.amevitnutrition.com.br/r/CBX8S8MNNV",
+  6: "https://seguro.amevitnutrition.com.br/r/PCH7AYYGDO",
+};
 
 const QTY_OPTIONS: { value: Qty; label: string; detail: string }[] = [
   { value: 1, label: "1 Frasco", detail: "R$ 64,99 • Frete Grátis" },
@@ -12,12 +19,6 @@ const QTY_OPTIONS: { value: Qty; label: string; detail: string }[] = [
   { value: 5, label: "5 Frascos", detail: "R$ 234,95 • Frete Grátis + 10% OFF" },
   { value: 6, label: "6 Frascos", detail: "R$ 259,94 • Frete Grátis + 15% OFF ⭐" },
 ];
-
-const getWhatsAppUrl = (qty: Qty) => {
-  const opt = QTY_OPTIONS.find((o) => o.value === qty)!;
-  const msg = `Olá! Quero garantir *${opt.label}* do Mente Blindada com 49% OFF (${opt.detail}). Sou de Piracuruca/região. 🧠`;
-  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-};
 
 const OfferSection = () => {
   const [quantity, setQuantity] = useState<Qty>(1);
@@ -87,11 +88,11 @@ const OfferSection = () => {
               <div className="flex items-center gap-2 flex-wrap mb-1">
                 <span className="text-lg">📍</span>
                 <span className="text-sm text-white">
-                  Chegará em <strong className="nm-text-green">Piracuruca e região</strong> em até <strong className="nm-text-green">3 dias úteis</strong>
+                  Chegará em <strong className="nm-text-green">Teresina</strong> em até <strong className="nm-text-green">1 dia útil</strong> — <strong className="nm-text-green">Chega amanhã</strong>
                 </span>
               </div>
               <p className="text-xs nm-text-muted">
-                Enviamos para Piracuruca, Batalha, Buriti dos Lopes, Cocal e toda a região Norte do Piauí — Frete Grátis
+                Entrega Full em Teresina — Frete Grátis
               </p>
             </div>
 
@@ -137,16 +138,16 @@ const OfferSection = () => {
 
             {/* CTA */}
             <a
-              href={getWhatsAppUrl(quantity)}
+              href={CHECKOUT_URLS[quantity]}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => (window as any).fbq?.('track', 'Contact')}
+              onClick={() => (window as any).fbq?.('track', 'InitiateCheckout')}
               className="nm-cta block w-full text-center px-6 py-5 rounded-xl text-base md:text-lg"
             >
-              💬 GARANTIR MINHA MENTE BLINDADA VIA WHATSAPP
+              🛒 GARANTIR MINHA MENTE BLINDADA COM 49% OFF
             </a>
             <p className="nm-text-muted text-xs text-center mt-3">
-              Compra 100% segura • Garantia de 7 dias • Atendimento direto no WhatsApp
+              Compra 100% segura • Garantia de 7 dias • Checkout criptografado
             </p>
 
             {/* Trust badges */}

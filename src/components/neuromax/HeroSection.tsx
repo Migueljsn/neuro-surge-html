@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 
-const WA_URL = "https://wa.me/5586999315131?text=" + encodeURIComponent("Olá! Quero garantir o Mente Blindada com 49% OFF. Sou de Piracuruca/região. 🧠");
 
 const fullText = "Seu Cérebro Está Funcionando Com o Tanque Vazio — E Você Nem Percebe.";
 
@@ -41,7 +40,7 @@ const HeroSection = () => {
               DESENVOLVIDO COM BASE EM PESQUISAS DO MIT • HARVARD
             </p>
             <p className="font-mono-sci text-xs nm-text-muted tracking-widest uppercase mb-4 animate-fade-up">
-              📍 CHEGANDO EM PIRACURUCA E REDONDEZAS EM ATÉ 3 DIAS ÚTEIS
+              ⚡ ENTREGA FULL EM TERESINA — CHEGA AMANHÃ • FRETE GRÁTIS
             </p>
 
             <h1 className={`text-3xl md:text-[56px] md:leading-[1.05] font-extrabold mb-6 transition-all duration-500 ${
@@ -81,10 +80,9 @@ const HeroSection = () => {
             </div>
 
             <div className="animate-fade-up-delay-3 flex flex-col items-center md:items-start">
-              <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-                onClick={() => (window as any).fbq?.('track', 'Contact')}
+              <a href="#checkout"
                 className="nm-cta inline-block w-full md:w-auto px-8 py-4 rounded-lg text-base md:text-lg text-center">
-                💬 QUERO MINHA MENTE BLINDADA VIA WHATSAPP
+                🛒 QUERO MINHA MENTE BLINDADA COM 49% OFF
               </a>
               <p className="nm-text-muted text-xs mt-3 text-center md:text-left">
                 Garantia de 7 dias • Frete Grátis • Parcele em 12x

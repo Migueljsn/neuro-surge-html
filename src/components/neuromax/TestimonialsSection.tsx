@@ -10,8 +10,8 @@ const testimonials = [
     name: "Francisca R.",
     handle: "",
     source: "E-commerce",
-    verified: "Compra verificada — Piracuruca, PI",
-    text: "Moro em Piracuruca e achei que ia demorar a chegar, mas chegou em 3 dias. Estou no segundo frasco e a diferença no meu foco e na memória é clara. Recomendo demais pra quem é daqui da região.",
+    verified: "Compra verificada — Teresina, PI",
+    text: "Moro em Teresina e fiz o pedido de manhã — chegou no mesmo dia à tarde! Estou no segundo frasco e a diferença no meu foco e na memória é clara. Recomendo demais.",
   },
   {
     name: "Bethania P.",
