@@ -8,12 +8,9 @@ interface VSLSectionProps {
   onVideoTimeReached?: () => void;
 }
 
-/** Tenta extrair o currentTime de qualquer formato de mensagem do converteai */
 function extractTime(data: unknown): number | null {
   if (!data || typeof data !== "object") return null;
   const d = data as Record<string, unknown>;
-
-  // Formatos conhecidos do converteai / vturb
   const candidates = [
     d.currentTime,
     d.time,
@@ -21,7 +18,6 @@ function extractTime(data: unknown): number | null {
     (d.data as Record<string, unknown>)?.currentTime,
     (d.data as Record<string, unknown>)?.time,
   ];
-
   for (const v of candidates) {
     if (typeof v === "number" && v > 0) return v;
   }
@@ -29,17 +25,25 @@ function extractTime(data: unknown): number | null {
 }
 
 const VSLSection = ({ onVideoTimeReached }: VSLSectionProps) => {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const reachedRef = useRef(false);
   const fallbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    // SDK do smartplayer
+    // Injeta SDK
     const SDK_SRC = "https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js";
     if (!document.querySelector(`script[src="${SDK_SRC}"]`)) {
       const script = document.createElement("script");
       script.src = SDK_SRC;
       script.async = true;
       document.head.appendChild(script);
+    }
+
+    // Define o src do iframe diretamente via ref
+    if (iframeRef.current) {
+      const search = location.search || "?";
+      const vl = encodeURIComponent(location.href);
+      iframeRef.current.src = `https://scripts.converteai.net/0b256e8c-1ea0-49a1-a6c2-4aa9d6840568/players/69c6ed2d3a29b825b3af6b71/v4/embed.html${search}&vl=${vl}`;
     }
 
     const unlock = () => {
@@ -50,32 +54,25 @@ const VSLSection = ({ onVideoTimeReached }: VSLSectionProps) => {
     };
 
     const handleMessage = (event: MessageEvent) => {
-      // Aceita mensagens de qualquer origem (converteai usa subdomínios variados)
       let data = event.data;
       if (typeof data === "string") {
         try { data = JSON.parse(data); } catch { return; }
       }
 
-      // Detecta início do vídeo para acionar o fallback por timer
+      // Inicia fallback por timer ao detectar início do vídeo
       if (!fallbackTimerRef.current && !reachedRef.current) {
-        const isPlaying =
-          (data as Record<string, unknown>)?.event === "play" ||
-          (data as Record<string, unknown>)?.type === "play" ||
-          (data as Record<string, unknown>)?.event === "timeupdate" ||
-          (data as Record<string, unknown>)?.type === "timeupdate" ||
-          (data as Record<string, unknown>)?.type === "PLAYER_TIME_UPDATE";
-
-        if (isPlaying) {
-          // fallback: libera após TARGET_TIME segundos a partir do início
+        const d = data as Record<string, unknown>;
+        const isActive =
+          d?.event === "play" || d?.type === "play" ||
+          d?.event === "timeupdate" || d?.type === "timeupdate" ||
+          d?.type === "PLAYER_TIME_UPDATE";
+        if (isActive) {
           fallbackTimerRef.current = setTimeout(unlock, TARGET_TIME * 1000);
         }
       }
 
-      // Verifica o tempo diretamente
       const time = extractTime(data);
-      if (time !== null && time >= TARGET_TIME) {
-        unlock();
-      }
+      if (time !== null && time >= TARGET_TIME) unlock();
     };
 
     window.addEventListener("message", handleMessage);
@@ -105,10 +102,11 @@ const VSLSection = ({ onVideoTimeReached }: VSLSectionProps) => {
             <div id={`${PLAYER_ID}_wrapper`} style={{ margin: "0 auto", width: "100%" }}>
               <div style={{ position: "relative", paddingTop: "56.25%" }} id={`${PLAYER_ID}_aspect`}>
                 <iframe
+                  ref={iframeRef}
                   id={PLAYER_ID}
                   allowFullScreen
+                  allow="autoplay; fullscreen"
                   referrerPolicy="origin"
-                  src="about:blank"
                   style={{
                     position: "absolute",
                     top: 0,
@@ -116,16 +114,6 @@ const VSLSection = ({ onVideoTimeReached }: VSLSectionProps) => {
                     width: "100%",
                     height: "100%",
                     border: "none",
-                  }}
-                  onLoad={(e) => {
-                    const iframe = e.currentTarget;
-                    if (iframe.src === "about:blank") {
-                      iframe.src =
-                        "https://scripts.converteai.net/0b256e8c-1ea0-49a1-a6c2-4aa9d6840568/players/69c6ed2d3a29b825b3af6b71/v4/embed.html" +
-                        (location.search || "?") +
-                        "&vl=" +
-                        encodeURIComponent(location.href);
-                    }
                   }}
                 />
               </div>
