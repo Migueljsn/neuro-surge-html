@@ -12,8 +12,12 @@ import FAQSection from "@/components/landing/FAQSection";
 import FinalCTASection from "@/components/landing/FinalCTASection";
 import StickyCTA from "@/components/landing/StickyCTA";
 
+// Em desenvolvimento o player converteai não envia postMessage para localhost,
+// então liberamos o conteúdo automaticamente para poder testar.
+const IS_DEV = import.meta.env.DEV;
+
 const Index = () => {
-  const [contentVisible, setContentVisible] = useState(false);
+  const [contentVisible, setContentVisible] = useState(IS_DEV);
 
   const handleVideoTimeReached = useCallback(() => {
     setContentVisible(true);
