@@ -8,8 +8,29 @@ interface VSLSectionProps {
   onVideoTimeReached?: () => void;
 }
 
+/** Tenta extrair o currentTime de qualquer formato de mensagem do converteai */
+function extractTime(data: unknown): number | null {
+  if (!data || typeof data !== "object") return null;
+  const d = data as Record<string, unknown>;
+
+  // Formatos conhecidos do converteai / vturb
+  const candidates = [
+    d.currentTime,
+    d.time,
+    d.position,
+    (d.data as Record<string, unknown>)?.currentTime,
+    (d.data as Record<string, unknown>)?.time,
+  ];
+
+  for (const v of candidates) {
+    if (typeof v === "number" && v > 0) return v;
+  }
+  return null;
+}
+
 const VSLSection = ({ onVideoTimeReached }: VSLSectionProps) => {
   const reachedRef = useRef(false);
+  const fallbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     // SDK do smartplayer
@@ -21,23 +42,47 @@ const VSLSection = ({ onVideoTimeReached }: VSLSectionProps) => {
       document.head.appendChild(script);
     }
 
-    // Recebe eventos de tempo via postMessage do iframe
-    const handleMessage = (event: MessageEvent) => {
+    const unlock = () => {
       if (reachedRef.current) return;
-      try {
-        const data = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
-        const time = data?.currentTime ?? data?.time ?? data?.position;
-        if (typeof time === "number" && time >= TARGET_TIME) {
-          reachedRef.current = true;
-          onVideoTimeReached?.();
+      reachedRef.current = true;
+      if (fallbackTimerRef.current) clearTimeout(fallbackTimerRef.current);
+      onVideoTimeReached?.();
+    };
+
+    const handleMessage = (event: MessageEvent) => {
+      // Aceita mensagens de qualquer origem (converteai usa subdomínios variados)
+      let data = event.data;
+      if (typeof data === "string") {
+        try { data = JSON.parse(data); } catch { return; }
+      }
+
+      // Detecta início do vídeo para acionar o fallback por timer
+      if (!fallbackTimerRef.current && !reachedRef.current) {
+        const isPlaying =
+          (data as Record<string, unknown>)?.event === "play" ||
+          (data as Record<string, unknown>)?.type === "play" ||
+          (data as Record<string, unknown>)?.event === "timeupdate" ||
+          (data as Record<string, unknown>)?.type === "timeupdate" ||
+          (data as Record<string, unknown>)?.type === "PLAYER_TIME_UPDATE";
+
+        if (isPlaying) {
+          // fallback: libera após TARGET_TIME segundos a partir do início
+          fallbackTimerRef.current = setTimeout(unlock, TARGET_TIME * 1000);
         }
-      } catch {
-        // ignora mensagens não-JSON
+      }
+
+      // Verifica o tempo diretamente
+      const time = extractTime(data);
+      if (time !== null && time >= TARGET_TIME) {
+        unlock();
       }
     };
 
     window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
+    return () => {
+      window.removeEventListener("message", handleMessage);
+      if (fallbackTimerRef.current) clearTimeout(fallbackTimerRef.current);
+    };
   }, [onVideoTimeReached]);
 
   return (
