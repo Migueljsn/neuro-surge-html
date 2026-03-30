@@ -34,7 +34,7 @@ const HeroSection = () => {
                 </span>
 
                 <span className="bg-[#5040a0]/10 text-[#5040a0] text-xs font-bold px-3 py-1 rounded-full border border-[#5040a0]/30">
-                  R$64,90
+                  Chegará amanhã se comprar nas próximas 4 horas⏰
                 </span>
               </div>
 
